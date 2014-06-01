@@ -9,23 +9,30 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-copy')
 
-  grunt.registerTask('default', ['typescript', 'concat', 'uglify', 'clean', 'copy', 'compass'])
+  grunt.registerTask('default', ['clean', 'typescript', 'uglify', 'copy', 'compass'])
   grunt.registerTask('server', ['connect'])
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
 
+    clean: ['build/*']
+
     uglify:
       dist:
         files: 'build/app.min.js': ['build/app.js']
 
-    concat:
-      hackleview:
-        src: ['src/ts/**/*.js']
+    typescript:
+      base:
+        src: ['src/ts/**/*.ts']
         dest: 'build/app.js'
+        options:
+          sourceMap: true
 
-      options:
-        separator: ';'
+      test:
+        src: ['tests/**/*.ts']
+        dest: 'tests/test.js'
+        options:
+          sourceMap: true
 
     copy:
       html:
@@ -44,12 +51,6 @@ module.exports = (grunt)->
           dest: 'build/imgs/'
         }]
 
-    typescript:
-      base:
-        src: ['src/ts/**/*.ts', 'tests/**/*.ts']
-        options:
-          sourceMap: false
-
     compass:
       dist:
         options:
@@ -58,7 +59,7 @@ module.exports = (grunt)->
     watch:
       typescript:
         files: ['src/ts/**/*.ts', 'tests/**/*.ts']
-        tasks: ['typescript', 'concat', 'uglify', 'clean', 'copy']
+        tasks: ['clean', 'typescript', 'uglify', 'copy', 'compass']
         options:
           atBegin: true
 
@@ -73,8 +74,6 @@ module.exports = (grunt)->
         tasks: ['copy:html']
         options:
           atBegin: true
-
-    clean: ['src/ts/**/*.js']
 
     connect:
       server:
