@@ -1,38 +1,18 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var OOP;
-(function (OOP) {
-    var Clazz = (function () {
-        function Clazz(id) {
-            this.id = id;
+var Hachisch;
+(function (Hachisch) {
+    var App = (function () {
+        function App() {
+            this.show();
         }
-        return Clazz;
-    })();
-    OOP.Clazz = Clazz;
-
-    var ID = (function () {
-        function ID(id) {
-            this.id = id;
-        }
-        ID.prototype.getValue = function () {
-            return this.id;
+        App.prototype.show = function () {
+            if (/view=show/.test(location.hash)) {
+                $('#test').removeClass('hide');
+            }
         };
-        return ID;
+        return App;
     })();
-    OOP.ID = ID;
+    Hachisch.App = App;
 
-    var SubClazz = (function (_super) {
-        __extends(SubClazz, _super);
-        function SubClazz(id, value) {
-            _super.call(this, id);
-            this.value = value;
-        }
-        return SubClazz;
-    })(Clazz);
-    OOP.SubClazz = SubClazz;
-})(OOP || (OOP = {}));
+    new App();
+})(Hachisch || (Hachisch = {}));
 //# sourceMappingURL=app.js.map

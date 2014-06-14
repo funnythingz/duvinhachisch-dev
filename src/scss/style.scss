@@ -2,13 +2,27 @@
 
 @import "compass/css3";
 
-body {
-  background-color: #f1f2f3;
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
-}
-
 h1 {
   color: #123;
   @include text-shadow(0 1px 0 #fff);
+}
 
+.hero {
+  width: 100%;
+  height: 252px;
+  background: #000 url(imgs/hero.jpg) no-repeat center 0;
+
+  @media screen and (max-width: 768px) {
+    @include background-size(auto 120px);
+    height: 120px;
+  }
+
+  h1 {
+    margin: 0;
+    visibility: hidden;
+  }
+}
+
+.hide {
+  display: none;
 }
